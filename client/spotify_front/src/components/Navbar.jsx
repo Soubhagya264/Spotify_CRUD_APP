@@ -1,13 +1,14 @@
 import React from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import { Container, Wrapper, Left, Center, Right, Logo,SearchContainer, Input, MenuItem } from "../style/Navbar_Styled";
+import { Link } from "react-router-dom";
 const Navbar = () => {
     return (
         <Container>
             <Wrapper>
                 <Left>
                     
-                    <MenuItem style={{backgroundColor:"white",color:"black"}}>HOME </MenuItem>  
+                    <Link to="/" style={{textDecoration:"none"}}><MenuItem style={{backgroundColor:"white",color:"black"}}>HOME </MenuItem></Link>  
                 </Left>
                 <Center>
                     <Logo>SpotifyClone</Logo>

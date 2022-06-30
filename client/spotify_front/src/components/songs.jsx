@@ -5,6 +5,7 @@ import {FaStar} from 'react-icons/fa';
 import AddIcon from '@mui/icons-material/Add';
 import Ratings from './Ratings';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 const Songs = () => {
     const [listOfRatings, setListOfRatings] = useState([]);
     console.log(listOfRatings);
@@ -14,11 +15,11 @@ const Songs = () => {
         <Container>
         <Title>TOP 10 SONGS</Title>
         <Right>
-            <Button>
+            <Link to="/addingSong"><Button>
                 <AddIcon style={{fontSize:16,paddingRight:4}}></AddIcon>
                 ADD SONGS
-                
             </Button>
+            </Link>
         </Right>
             <Wrapper>
              <Table>

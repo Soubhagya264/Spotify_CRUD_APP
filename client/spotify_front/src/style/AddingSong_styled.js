@@ -6,6 +6,8 @@ export const Container = styled.div`
     text-align:center;
     justify-content:center;
 
+    
+
     `
 export const Wrapper = styled.div`
     margin-top: 30px;
@@ -31,6 +33,15 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     `;
+
+export const SELECTFILE=styled.div`
+    display: flex;
+ 
+    width:92%;
+    align-items: center;
+    justify-content: center;
+    `;
+
     export const LABEL=styled.label`
     flex: 1;
    font-family: 'Times New Roman', Times, serif;

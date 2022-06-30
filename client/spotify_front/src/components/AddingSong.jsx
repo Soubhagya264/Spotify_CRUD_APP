@@ -1,11 +1,19 @@
 import { Title } from "../style/Footer_Styled";
-import { Container, Wrapper, FORM,FILED, LABEL, INPUT, BUTTON,BUTTONFILED, SELECT,OPTION,Imagelabel } from "../style/AddingSong_styled";
+import { Container, Wrapper, FORM,FILED, LABEL, INPUT, BUTTON,BUTTONFILED, SELECT,OPTION,Imagelabel,SELECTFILE } from "../style/AddingSong_styled";
 import ImageIcon from '@mui/icons-material/Image';
+import AddIcon from '@mui/icons-material/Add';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import AddArtistModal from "./AddArtistModal";
+
 
 const AddingSong = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   return (
     <>
-        <Container>
+        <Container >
+        {modalOpen ? <AddArtistModal setModalOpen={setModalOpen} modalOpen={modalOpen} /> : <>
+
         <Title>Adding a new Song</Title>
             <Wrapper>
             <FORM>
@@ -28,7 +36,7 @@ const AddingSong = () => {
                 </Imagelabel>
                 </FILED>
 
-                <FILED>
+                <SELECTFILE>
                 <LABEL>Artist</LABEL>
                 <SELECT>
                     <OPTION>Ace of Base</OPTION>
@@ -37,7 +45,11 @@ const AddingSong = () => {
                     <OPTION>The Who</OPTION>
                     <OPTION>The Doors</OPTION>
                 </SELECT>
-                </FILED>
+                <BUTTON style={{position:"relative",zIndex:1}}
+                onClick={() => setModalOpen(true)}
+                ><AddIcon  style={{fontSize:16,paddingRight:4}}/>Add Artists</BUTTON>
+                </SELECTFILE>
+                
 
                 
                 <BUTTONFILED>
@@ -45,10 +57,17 @@ const AddingSong = () => {
                 <BUTTON>Save</BUTTON>
                 </BUTTONFILED>
 
-
-
             </FORM>
             </Wrapper>
+          
+        </>}
+
+       
+
+        
+        
+
+        
         </Container>
     </>
   );
