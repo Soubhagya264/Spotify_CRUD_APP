@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     `;
-    export const FILED=styled.div`
+    export const FIELD=styled.div`
     display: flex;
     flex-wrap: wrap;
     width:80%;
@@ -34,10 +34,28 @@ export const Wrapper = styled.div`
     justify-content: center;
     `;
 
+    export const LEFT=styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    `
+    export const CENTER=styled.div`
+    flex: 2;
+    display: flex;
+    text-align: center;
+    `
+    export const RIGHT=styled.div`
+    flex: 1;
+  display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    `
+
 export const SELECTFILE=styled.div`
     display: flex;
  
-    width:92%;
+    width:80%;
     align-items: center;
     justify-content: center;
     `;
@@ -47,6 +65,7 @@ export const SELECTFILE=styled.div`
    font-family: 'Times New Roman', Times, serif;
     font-size: 1.25rem;
     font-weight: bold;
+    width:40%;
     
    
     `;
@@ -62,10 +81,10 @@ export const SELECTFILE=styled.div`
     `;
 
     export const INPUT=styled.input`
-    flex:1;
+   
     
     text-align:center;
-    width:50%;
+    width:100%;
     margin:10px 0px;
     padding:5px;
     border-radius:5px;
@@ -98,22 +117,7 @@ export const SELECTFILE=styled.div`
     justify-content: center;
     `;
 
-    export const SELECT=styled.select`
-    flex:1;
-    width:50%;
-    margin:10px 0px;
-    text-align:center;
-    padding:5px;
-    border-radius:5px;
-    font-size:20px;
-    font-weight:200;
-    border:1px solid #ccc;
-    `;
-    export const OPTION=styled.option`
-    font-size:20px;
-    font-weight:200;
-    border:1px solid #ccc;
-    `;
+    
 
 
 

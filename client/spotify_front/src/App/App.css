@@ -41,9 +41,13 @@
   font-weight: bold;
   color:red;
   transform: scale(1.2);
-  
- 
-
-
-  
+    
 }
+
+.multiSelectContainer {
+  position: relative;
+  text-align: left;
+  width: 200%;
+}
+
+

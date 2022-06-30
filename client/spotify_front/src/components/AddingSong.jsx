@@ -1,74 +1,115 @@
 import { Title } from "../style/Footer_Styled";
-import { Container, Wrapper, FORM,FILED, LABEL, INPUT, BUTTON,BUTTONFILED, SELECT,OPTION,Imagelabel,SELECTFILE } from "../style/AddingSong_styled";
+import { Container, Wrapper, FORM, FIELD, LABEL, INPUT, BUTTON, BUTTONFILED, Imagelabel, SELECTFILE, LEFT, RIGHT, CENTER } from "../style/AddingSong_styled";
 import ImageIcon from '@mui/icons-material/Image';
 import AddIcon from '@mui/icons-material/Add';
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import AddArtistModal from "./AddArtistModal";
+import Multiselect from "multiselect-react-dropdown";
 
 
 const AddingSong = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  console.log(modalOpen);
+  const [ArtistList, setArtistList] = useState([
+    "Ace of Base",
+    "The Beatles",
+    "The Rolling Stones",
+    "The Who",
+    "The Doors",
+    "The Beach"
+  ]);
   return (
     <>
-        <Container >
-        {modalOpen ? <AddArtistModal setModalOpen={setModalOpen} modalOpen={modalOpen} /> : <>
+      <Container >
+        {modalOpen && <AddArtistModal setModalOpen={setModalOpen} modalOpen={modalOpen} />}
 
-        <Title>Adding a new Song</Title>
-            <Wrapper>
+
+        <>
+          <Title>Adding a new Song</Title>
+          <Wrapper>
             <FORM>
-                <FILED>
-                <LABEL>Song Name</LABEL>
-                <INPUT type="text" name="songName" placeholder="Song Name" />
-                </FILED>
+              <FIELD>
+                <LEFT>
+                  <LABEL>Song Name</LABEL>
+                </LEFT>
+                <CENTER>
+                  <INPUT type="text" name="songName" placeholder="Song Name" />
+                </CENTER>
+                <RIGHT>
+                </RIGHT>
+              </FIELD>
 
-                <FILED>
-                <LABEL>Date Released</LABEL>
-                <INPUT type="date" name="dateReleased" placeholder="Date Released" />
-                </FILED>
-                
-                <FILED>
-                <LABEL > Artwork</LABEL>
-                <Imagelabel for="image" >
-                 <ImageIcon style={{fontSize:22,paddingRight:10}}></ImageIcon>
-                 <span style={{color:"gray",fontWeight:"bolder"}}>Upload Image</span> 
-                <INPUT type="file" name="artwork" id="image" style={{display:"none"}} />
-                </Imagelabel>
-                </FILED>
+              <FIELD>
+                <LEFT>
+                  <LABEL>Date Released</LABEL>
+                </LEFT>
+                <CENTER>
+                  <INPUT type="date" name="dateReleased" placeholder="Date Released" />
+                </CENTER>
+                <RIGHT>
+                </RIGHT>
+              </FIELD>
 
-                <SELECTFILE>
-                <LABEL>Artist</LABEL>
-                <SELECT>
-                    <OPTION>Ace of Base</OPTION>
-                    <OPTION>The Beatles</OPTION>
-                    <OPTION>The Rolling Stones</OPTION>
-                    <OPTION>The Who</OPTION>
-                    <OPTION>The Doors</OPTION>
-                </SELECT>
-                <BUTTON style={{position:"relative",zIndex:1}}
-                onClick={() => setModalOpen(true)}
-                ><AddIcon  style={{fontSize:16,paddingRight:4}}/>Add Artists</BUTTON>
-                </SELECTFILE>
-                
+              <FIELD>
+                <LEFT>
+                  <LABEL > Artwork</LABEL>
+                </LEFT>
+                <CENTER>
+                  <Imagelabel for="image" >
+                    <ImageIcon style={{ fontSize: 22, paddingRight: 10 }}></ImageIcon>
+                    <span style={{ color: "gray", fontWeight: "bolder" }}>Upload Image</span>
+                    <INPUT type="file" name="artwork" id="image" style={{ display: "none" }} />
+                  </Imagelabel>
+                </CENTER>
+                <RIGHT>
+                </RIGHT>
+              </FIELD>
 
-                
-                <BUTTONFILED>
+
+              <SELECTFILE>
+                <LEFT>
+                  <LABEL>Artist</LABEL>
+                </LEFT>
+
+                <CENTER >
+                <Multiselect 
+                    options={ArtistList}
+                    isObject={false}
+                    
+                    displayValue="none"
+                    showCheckbox={true}
+                  />
+                </CENTER>
+
+                <RIGHT>
+                  <BUTTON
+
+                    onClick={
+                      (e) => {
+                        e.preventDefault();
+                        setModalOpen(true)
+                      }
+                    }
+
+                  ><AddIcon style={{ fontSize: 16, paddingRight: 4 }} />Add Artists</BUTTON>
+                </RIGHT>
+
+              </SELECTFILE>
+
+
+
+              <BUTTONFILED>
                 <BUTTON>Cancel</BUTTON>
                 <BUTTON>Save</BUTTON>
-                </BUTTONFILED>
+              </BUTTONFILED>
 
             </FORM>
-            </Wrapper>
-          
-        </>}
+          </Wrapper>
 
-       
 
-        
-        
-
-        
-        </Container>
+        </>
+      </Container>
     </>
   );
 }

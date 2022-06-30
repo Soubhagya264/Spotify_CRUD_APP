@@ -4,7 +4,7 @@ import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { ModalBackground, ModalContainer, ModalHeader, ModalTitle, ModalClose, ModalBody, ModalBodyContainer,  ModalBodyInput, ModalBodyInputText, ModalBodyInputTextArea, ModalBodyTitleText, ModalBodyTitle, ModalFooter, ModalFooterButton, ModalFooterButtonText,closeStyle } from "../style/AddArtistModel_Styled";
 
-const AddArtistModal = ({ setOpenModal,modalOpen }) => {
+const AddArtistModal = ({ setModalOpen,modalOpen }) => {
     if (!modalOpen) {
         return null;
     }
@@ -18,7 +18,8 @@ const AddArtistModal = ({ setOpenModal,modalOpen }) => {
             <ModalTitle>Add Artist</ModalTitle>
             <ModalClose
               onClick={() => {
-                setOpenModal(false);
+                console.log("clicked");
+                setModalOpen(false);
               }}
             >
               <CloseIcon className="close" style={closeStyle} />
@@ -49,7 +50,7 @@ const AddArtistModal = ({ setOpenModal,modalOpen }) => {
           <ModalFooter>
             <ModalFooterButton
               onClick={() => {
-                setOpenModal(false);
+                setModalOpen(false);
               }}
             >
               <ModalFooterButtonText>Cancel</ModalFooterButtonText>

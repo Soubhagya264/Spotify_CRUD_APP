@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<AddArtistModal />} />
+          <Route path="/" element={<Songs />} />
           <Route path="/addingSong" element={<AddingSong />} />
         </Routes>
         <Footer/>
