@@ -17,6 +17,7 @@ const artistSchema = new mangoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Song'
     }]
-}
+},
+{timestamps: true}
 );
 module.exports = mangoose.model('Artist', artistSchema);
