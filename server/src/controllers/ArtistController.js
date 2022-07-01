@@ -1,4 +1,4 @@
-const Artist=require('../models/ArtistModel');
+const Artist=require('../models/ArtistsModel');
 
 const createArtist=async (req,res)=>{
     const artist=new Artist(req.body);
@@ -28,16 +28,7 @@ const getArtistById=async (req,res)=>{
         res.send(err);
     }
 }
-// get by songs
-const getArtistBySong=async (req,res)=>{
-    try{
-        const artist=await Artist.find({Songs:req.params.id});
-        res.send(artist);
-    }
-    catch(err){
-        res.send(err);
-    }
-}
+
 
 const updateArtist=async (req,res)=>{
     try{
@@ -57,4 +48,4 @@ const deleteArtist=async (req,res)=>{
         res.send(err);
     }
 }
-module.exports={createArtist,getArtists,getArtistById,getArtistBySong,updateArtist,deleteArtist};
+module.exports={createArtist,getArtists,getArtistById,updateArtist,deleteArtist};

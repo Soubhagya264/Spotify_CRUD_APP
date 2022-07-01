@@ -1,7 +1,9 @@
-const Song=require('../models/SongModel');
+const Song=require('../models/SongsModel');
+
 
 
 const createSong=async (req,res)=>{
+    console.log(req.body);
     const song=new Song(req.body);
     try{
         const newSong=await song.save();

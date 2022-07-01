@@ -13,10 +13,7 @@ const artistSchema = new mangoose.Schema({
         type: String,
         required: true
     },
-    Songs: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Song'
-    }]
+    
 },
 {timestamps: true}
 );

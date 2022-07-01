@@ -6,13 +6,10 @@ const SongSchema = new mongoose.Schema({
         required: true
     },
     DateOfRelease: {
-        type: String,
+        type:String,   
         required: true
     },
-    Cover: {
-        type:imgage,
-      
-    },
+    
     Artist: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist'
