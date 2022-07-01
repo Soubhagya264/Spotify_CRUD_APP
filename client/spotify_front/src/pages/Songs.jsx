@@ -3,7 +3,7 @@ import { Title } from '../style/Footer_Styled';
 import { Button,Container, Wrapper, Table, TableHead, TableRow, TableCell, TableBody,Right } from "../style/Song_Styled";
 import {FaStar} from 'react-icons/fa';
 import AddIcon from '@mui/icons-material/Add';
-import Ratings from './Ratings';
+import Ratings from '../components/Ratings';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 const Songs = () => {
@@ -17,7 +17,7 @@ const Songs = () => {
         <Right>
             <Link to="/addingSong"><Button>
                 <AddIcon style={{fontSize:16,paddingRight:4}}></AddIcon>
-                ADD SONGS
+                Add Songs
             </Button>
             </Link>
         </Right>

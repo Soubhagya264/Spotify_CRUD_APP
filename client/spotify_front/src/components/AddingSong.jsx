@@ -83,7 +83,7 @@ const AddingSong = () => {
                 </CENTER>
 
                 <RIGHT>
-                  <BUTTON
+                 <Link to="/addArtistModal"><BUTTON
 
                     onClick={
                       (e) => {
@@ -93,6 +93,7 @@ const AddingSong = () => {
                     }
 
                   ><AddIcon style={{ fontSize: 16, paddingRight: 4 }} />Add Artists</BUTTON>
+                  </Link> 
                 </RIGHT>
 
               </SELECTFILE>

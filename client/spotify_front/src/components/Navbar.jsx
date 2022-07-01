@@ -9,6 +9,7 @@ const Navbar = () => {
                 <Left>
                     
                     <Link to="/" style={{textDecoration:"none"}}><MenuItem style={{backgroundColor:"white",color:"black"}}>HOME </MenuItem></Link>  
+                    <Link to="/artist" style={{textDecoration:"none"}}><MenuItem style={{backgroundColor:"white",color:"black",marginLeft:"10px"}}>ARTIST</MenuItem></Link>
                 </Left>
                 <Center>
                     <Logo>SpotifyClone</Logo>
