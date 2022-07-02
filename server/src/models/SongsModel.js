@@ -9,7 +9,11 @@ const SongSchema = new mongoose.Schema({
         type:String,   
         required: true
     },
-    
+    Cover:{
+        data: Buffer,
+        contentType: String
+        
+    },
     Artist: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist'

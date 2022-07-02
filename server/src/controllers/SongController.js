@@ -1,10 +1,23 @@
 const Song=require('../models/SongsModel');
+var fs = require('fs');
+var path = require('path');
+const dotenv=require('dotenv');
+dotenv.config();
+
+
+      
+
 
 
 
 const createSong=async (req,res)=>{
     console.log(req.body);
-    const song=new Song(req.body);
+    data = req.body;
+    data.Cover = {
+        data:fs.readFileSync(path.join(__dirname,process.env.UPLOAD_FOLDER+req.file.filename)),
+        contentType: "image/jpg"
+    }
+    const song=new Song(data);
     try{
         const newSong=await song.save();
         res.send(newSong);
