@@ -7,7 +7,6 @@ const Navbar = () => {
         <Container>
             <Wrapper>
                 <Left>
-                    
                     <Link to="/" style={{textDecoration:"none"}}><MenuItem style={{backgroundColor:"white",color:"black"}}>HOME </MenuItem></Link>  
                     <Link to="/artist" style={{textDecoration:"none"}}><MenuItem style={{backgroundColor:"white",color:"black",marginLeft:"10px"}}>ARTIST</MenuItem></Link>
                 </Left>
@@ -16,8 +15,8 @@ const Navbar = () => {
                 </Center>
                 <Right>
                 
-                   <MenuItem>REGISTER </MenuItem>
-                    <MenuItem>SIGN IN</MenuItem>
+                 <Link style={{textDecoration:"none"}} to="/signup"><MenuItem style={{color:"white"}}>SIGN UP </MenuItem></Link>
+                 <Link style={{textDecoration:"none"}} to="/login"><MenuItem style={{color:"white"}}>LOGIN </MenuItem></Link>
                     <SearchContainer>
                     <Input placeholder="search"></Input>
                         <SearchIcon style={{color:"black",fontSize:20,paddingRight:5,cursor:"pointer"}} />

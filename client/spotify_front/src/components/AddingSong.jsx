@@ -28,7 +28,8 @@ const AddingSong = () => {
         <>
           <Title>Adding a new Song</Title>
           <Wrapper>
-            <FORM>
+            <FORM encType="multipart/form-data">
+            
               <FIELD>
                 <LEFT>
                   <LABEL>Song Name</LABEL>
@@ -59,7 +60,7 @@ const AddingSong = () => {
                   <Imagelabel for="image" >
                     <ImageIcon style={{ fontSize: 22, paddingRight: 10 }}></ImageIcon>
                     <span style={{ color: "gray", fontWeight: "bolder" }}>Upload Image</span>
-                    <INPUT type="file" name="artwork" id="image" style={{ display: "none" }} />
+                    <INPUT type="file" name="artwork" id="image" style={{ display: "none" }} encType="multipart/form-data" />
                   </Imagelabel>
                 </CENTER>
                 <RIGHT>
