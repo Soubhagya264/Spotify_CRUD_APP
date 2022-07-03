@@ -1,4 +1,7 @@
 const Song=require('../models/SongsModel');
+
+const ArtistController=require('../controllers/ArtistController');
+
 var fs = require('fs');
 var path = require('path');
 const dotenv=require('dotenv');
@@ -28,8 +31,34 @@ const createSong=async (req,res)=>{
 }
 const getSongs=async (req,res)=>{
     try{
-        const songs=await Song.find();
+        const songs=await Song.find().populate('Artist');
+       
+
+
+        
+   
+        
+        
+        
         res.send(songs);
+        
+
+        
+        
+      
+
+        
+
+
+
+        // set song.Artist to artist.Name
+    
+
+
+
+
+
+      
     }
     catch(err){
         res.send(err);

@@ -8,9 +8,9 @@ const {createArtist,getArtists,getArtistById,updateArtist,deleteArtist}=ArtistCo
 // create route
 router.post('/create',VerifyTokenAuthorization,createArtist);
 // get route
-router.get('/getAll',VerifyTokenAuthorization,getArtists);
+router.get('/getAll',getArtists);
 // get route by id
-router.get('/get/:id',VerifyTokenAuthorization,getArtistById);
+router.get('/get/:id',getArtistById);
 // update route
 router.put('/update/:id',VerifyTokenAuthorization,updateArtist);
 // delete route

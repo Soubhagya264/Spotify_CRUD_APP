@@ -4,11 +4,45 @@ import { Button,Container, Wrapper, Table, TableHead, TableRow, TableCell, Table
 import {FaStar} from 'react-icons/fa';
 import AddIcon from '@mui/icons-material/Add';
 import Ratings from '../components/Ratings';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { userRequest,publicRequest } from '../api/requestMethod';
+
+
 const Songs = () => {
     const [listOfRatings, setListOfRatings] = useState([]);
-    console.log(listOfRatings);
+    const [listOfSongs, setListOfSongs] = useState([]);
+    const [artist, setArtist] = useState([]);
+
+   
+    
+
+    useEffect(() => {
+        const getSongs = async () => {
+            try {
+                const response = await userRequest.get('/songs/getAll');
+                setListOfSongs(response.data);
+                console.log(response.data);
+                
+               
+            }
+            catch (error) {
+                console.log(error);
+            }
+            
+        }
+        getSongs();
+        
+    }
+        , []);
+
+        
+
+  
+
+        
+
+    
   return (
     <>
        
@@ -33,42 +67,38 @@ const Songs = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                        <TableCell>
-                            <img src="https://i.scdn.co/image/ab67616d0000b2737b8f8f8f8f8f8f8f8f8f8f8f8f" alt=""/>
-                        </TableCell>
-                        <TableCell>
-                            <p>The Sign</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>4/4/2020</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>Ace of Base</p>
-                        </TableCell>
-                        <TableCell>
-                            
-                      <Ratings name={"song1"} listOfRatings={listOfRatings}  setlistofRatings={setListOfRatings}/>
-             
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <img src="https://i.scdn.co/image/ab67616d0000b2737b8f8f8f8f8f8f8f8f8f8f8f8f" alt=""/>
-                        </TableCell>
-                        <TableCell>
-                            <p>The Sign</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>4/4/2020</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>Ace of Base</p>
-                        </TableCell>
-                        <TableCell>
-                        <Ratings name={"song2"} listOfRatings={listOfRatings}  setlistofRatings={setListOfRatings}/>
-                        </TableCell>
-                    </TableRow>
+                    
+                    {listOfSongs.map((song,index)=>{
+          
+                        return(
+                            <TableRow key={index}>
+                                <TableCell>
+                                    <img src={song.artwork} alt="artwork" width="100px" height="100px"/>
+                                </TableCell>
+                                <TableCell>{song.Name}</TableCell>
+                                <TableCell>{song.DateOfRelease}</TableCell>
+                                <TableCell>
+                                {song.Artist.map((artist,index)=>{
+                                    return(
+                                        <div key={index}>
+                                            {artist.Name}
+                                        </div>
+                                    )
+
+                                }
+                                )}
+                                </TableCell>
+                                <TableCell>
+                                    <Ratings name={song.Name} listOfRatings={listOfRatings}  setlistofRatings={setListOfRatings}/>
+                                </TableCell>
+                                
+                                
+                            </TableRow>
+                        )
+                    }
+
+                    )}
+                        
 
                     </TableBody>
              </Table>

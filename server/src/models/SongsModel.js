@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const SongSchema = new mongoose.Schema({
     Name: {
         type: String,
@@ -14,10 +15,10 @@ const SongSchema = new mongoose.Schema({
         contentType: String
         
     },
-    Artist: {
+    Artist: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist'
-    }
+    }]
 },
 {timestamps: true}
 );

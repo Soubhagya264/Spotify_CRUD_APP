@@ -9,15 +9,29 @@ import Add_Artist from '../components/Add_Artist';
 import Login from '../pages/login';
 import SignUp from '../pages/signup';
 import Artist from '../pages/Artist';
+import React, { useState, useEffect } from "react";
+import {getUserFromLocalStorage} from '../utils/LocalstorageItem';
+
+
 
 
 function App() {
+  
+const [user, setUser] = useState("");
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+useEffect(() => {
+  const user = getUserFromLocalStorage();
+  if (user!==null) {
+    setIsLoggedIn(true);
+  }
+}, []);
+
   return (
     <>
       <Router>
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} />
         <Routes>
-          <Route path="/" element={<Songs />} />
+          <Route path="/" element={<Songs user={user} />} />
           <Route path="/login" element={<Login/> } />
           <Route path="/signup" element={<SignUp/>} />
           <Route path="/addingSong" element={<AddingSong />} />

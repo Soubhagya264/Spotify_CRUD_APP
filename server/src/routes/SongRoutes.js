@@ -10,11 +10,11 @@ const {createSong,getSongs,getSongById,getSongByArtist,updateSong,deleteSong}=So
 // create route
 router.post('/create',VerifyTokenAuthorization,uploadFile,createSong);
 // get route
-router.get('/getAll',VerifyTokenAuthorization,getSongs);
+router.get('/getAll',getSongs);
 // get route by id
-router.get('/get/:id',VerifyTokenAuthorization,getSongById);
+router.get('/get/:id',getSongById);
 // get route by artist
-router.get('/getByArtist/:id',VerifyTokenAuthorization,getSongByArtist);
+router.get('/getByArtist/:id',getSongByArtist);
 // update route
 router.put('/update/:id',VerifyTokenAuthorization,updateSong);
 // delete route

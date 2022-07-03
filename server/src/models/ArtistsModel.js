@@ -14,6 +14,7 @@ const artistSchema = new mangoose.Schema({
         required: true
     },
     
+    
 },
 {timestamps: true}
 );
