@@ -2,23 +2,101 @@ import { Title } from "../style/Footer_Styled";
 import { Container, Wrapper, FORM, FIELD, LABEL, INPUT, BUTTON, BUTTONFILED, Imagelabel, SELECTFILE, LEFT, RIGHT, CENTER } from "../style/AddingSong_styled";
 import ImageIcon from '@mui/icons-material/Image';
 import AddIcon from '@mui/icons-material/Add';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddArtistModal from "./AddArtistModal";
-import Multiselect from "multiselect-react-dropdown";
+import { userRequest } from "../api/requestMethod";
+import Select from "react-select";
 
 
 const AddingSong = () => {
+
+  
   const [modalOpen, setModalOpen] = useState(false);
-  console.log(modalOpen);
-  const [ArtistList, setArtistList] = useState([
-    "Ace of Base",
-    "The Beatles",
-    "The Rolling Stones",
-    "The Who",
-    "The Doors",
-    "The Beach"
-  ]);
+  const [ArtistList, setArtistList] = useState([]);
+  const [ImageData, setImageData] = useState(null);
+  const [formData, setFormData] = useState({
+    Name: "",
+    DateOfRelease:"",
+    Artist: [],
+    file: null,
+  });
+const handleImageChange = (e) => {
+  setImageData(e.target.files[0], e.target.files[0].name);
+  setFormData({ ...formData, file: ImageData });
+  
+  
+}
+const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+}
+
+const handleMultiChange=(e)=>{
+  const value=(Array.isArray(e)?e.map(item=>item.value):[]);
+  
+  setFormData({...formData,Artist:value});
+}
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  
+  console.log(formData); 
+  userRequest.post("/songs/create",formData,
+  {headers: {
+    'Content-Type': 'multipart/form-data'
+  }}
+  ).then(res => {
+    console.log(res);
+  }
+  ).catch(err => {
+    console.log(err);
+  }
+  );
+  
+
+
+}
+
+
+
+
+
+  useEffect(() => {
+    const getArtists = async () => {
+      try {
+        const response = await userRequest.get("/artists/getAll");
+        
+        const artistList = response.data.map(artist => {
+          return {
+            value: artist._id,
+            label: artist.Name,
+            
+          };
+        } 
+        );
+       
+        setArtistList(artistList);
+
+      
+      }
+
+      
+            
+        
+      catch (error) {
+        console.log(error);
+      }
+      
+      
+
+    }
+    getArtists();
+  }
+    , []);
+
+    
+
   return (
     <>
       <Container >
@@ -35,7 +113,7 @@ const AddingSong = () => {
                   <LABEL>Song Name</LABEL>
                 </LEFT>
                 <CENTER>
-                  <INPUT type="text" name="songName" placeholder="Song Name" />
+                  <INPUT type="text" name="Name" placeholder="Song Name" onChange={handleChange} value={formData.Name} />
                 </CENTER>
                 <RIGHT>
                 </RIGHT>
@@ -46,7 +124,9 @@ const AddingSong = () => {
                   <LABEL>Date Released</LABEL>
                 </LEFT>
                 <CENTER>
-                  <INPUT type="date" name="dateReleased" placeholder="Date Released" />
+                  <INPUT type="date" name="DateOfRelease" placeholder="DateOfRelease" 
+                    onChange={handleChange} value={formData.DateOfRelease} />
+                
                 </CENTER>
                 <RIGHT>
                 </RIGHT>
@@ -60,7 +140,8 @@ const AddingSong = () => {
                   <Imagelabel for="image" >
                     <ImageIcon style={{ fontSize: 22, paddingRight: 10 }}></ImageIcon>
                     <span style={{ color: "gray", fontWeight: "bolder" }}>Upload Image</span>
-                    <INPUT type="file" name="artwork" id="image" style={{ display: "none" }} encType="multipart/form-data" />
+                    <INPUT type="file" name="Cover" id="image" style={{ display: "none" }} encType="multipart/form-data" onChange={handleImageChange} 
+                     />
                   </Imagelabel>
                 </CENTER>
                 <RIGHT>
@@ -74,12 +155,13 @@ const AddingSong = () => {
                 </LEFT>
 
                 <CENTER >
-                <Multiselect 
+                <Select style={{ width: "100%" }}
                     options={ArtistList}
-                    isObject={false}
-                    
-                    displayValue="none"
+                    isMulti
                     showCheckbox={true}
+                    name="Artist"
+                    onChange={handleMultiChange}
+                    
                   />
                 </CENTER>
 
@@ -103,7 +185,7 @@ const AddingSong = () => {
 
               <BUTTONFILED>
                 <BUTTON>Cancel</BUTTON>
-                <BUTTON>Save</BUTTON>
+                <BUTTON onClick={handleSubmit}>Save</BUTTON>
               </BUTTONFILED>
 
             </FORM>

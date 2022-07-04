@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Title } from '../style/Footer_Styled';
 import { Button,Container, Wrapper, Table, TableHead, TableRow, TableCell, TableBody,Right } from "../style/Song_Styled";
 import {FaStar} from 'react-icons/fa';
@@ -69,11 +70,16 @@ const Songs = () => {
                 <TableBody>
                     
                     {listOfSongs.map((song,index)=>{
+                       
+                        const base64String = btoa(String.fromCharCode(...new Uint8Array(song.Cover.data))); 
+                          
+                        console.log(base64String);
           
                         return(
                             <TableRow key={index}>
                                 <TableCell>
-                                    <img src={song.artwork} alt="artwork" width="100px" height="100px"/>
+                                
+                                <img src={`data:image/jpg;base64,${base64String}`} alt="artwork" width="100px" height="100px"/>
                                 </TableCell>
                                 <TableCell>{song.Name}</TableCell>
                                 <TableCell>{song.DateOfRelease}</TableCell>

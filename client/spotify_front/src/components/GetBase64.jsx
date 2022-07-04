@@ -1,6 +1,6 @@
 import React from 'react'
 
-const GetArtist = () => {
+const GetBase64 = () => {
   return (
     <div>
       
@@ -8,4 +8,5 @@ const GetArtist = () => {
   )
 }
 
-export default GetArtist
+export default GetBase64
+

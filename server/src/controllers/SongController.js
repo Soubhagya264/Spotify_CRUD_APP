@@ -14,8 +14,13 @@ dotenv.config();
 
 
 const createSong=async (req,res)=>{
-    console.log(req.body);
+    
     data = req.body;
+    if (!req.file) {
+        
+        return res.send({ message: 'No file received' });
+        
+    }
     data.Cover = {
         data:fs.readFileSync(path.join(__dirname,process.env.UPLOAD_FOLDER+req.file.filename)),
         contentType: "image/jpg"

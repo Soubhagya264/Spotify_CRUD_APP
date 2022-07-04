@@ -1,6 +1,6 @@
-const mangoose = require('mongoose');
+const mongoose = require('mongoose');
 
-const artistSchema = new mangoose.Schema({
+const artistSchema = new mongoose.Schema({
     Name: {
         type: String,
         required: true
@@ -13,9 +13,10 @@ const artistSchema = new mangoose.Schema({
         type: String,
         required: true
     },
+   
     
     
 },
 {timestamps: true}
 );
-module.exports = mangoose.model('Artist', artistSchema);
+module.exports = mongoose.model('Artist', artistSchema);
