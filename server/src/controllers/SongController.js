@@ -37,14 +37,7 @@ const createSong=async (req,res)=>{
 const getSongs=async (req,res)=>{
     try{
         const songs=await Song.find().populate('Artist');
-       
-
-
-        
-   
-        
-        
-        
+               
         res.send(songs);
         
 

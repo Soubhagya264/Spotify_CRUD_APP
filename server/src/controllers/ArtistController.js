@@ -2,6 +2,7 @@ const Artist=require('../models/ArtistsModel');
 
 const createArtist=async (req,res)=>{
     const artist=new Artist(req.body);
+    
     try{
         const newArtist=await artist.save();
         res.send(newArtist);
@@ -11,8 +12,10 @@ const createArtist=async (req,res)=>{
     }
 }
 const getArtists=async (req,res)=>{
+
+
     try{
-        const artists=await Artist.find();
+        const artists=await Artist.find().populate('Songs');
         res.send(artists);
     }
     catch(err){

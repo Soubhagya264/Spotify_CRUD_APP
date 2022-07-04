@@ -2,9 +2,27 @@ import React from 'react';
 import { Title } from '../style/Footer_Styled';
 import { Button,Container, Wrapper, Table, TableHead, TableRow, TableCell, TableBody,Right } from "../style/Song_Styled";
 import AddIcon from '@mui/icons-material/Add';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { publicRequest } from '../api/requestMethod';
 import { Link } from 'react-router-dom';
 const Songs = () => {
+
+    const [ArtistList, setArtistList] = useState([]);
+    const [listOfSongs, setListOfSongs] = useState([]);
+
+    useEffect(()=> {
+        publicRequest.get("/artists/getAll").then(res => {
+            setArtistList(res.data);
+            
+        }).catch(err => {
+            console.log(err);
+        }
+        );
+    }
+    , []);
+
+    
+console.log(ArtistList);
    
   return (
     <>
@@ -29,34 +47,28 @@ const Songs = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    <TableRow>
-                        
-                        <TableCell>
-                        <p>Ace of Base</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>4/4/2020</p>
-                        </TableCell>
-                        <TableCell>
-                            Someone you Loved
-                        </TableCell>
-                
-                    </TableRow>
-                    <TableRow>
-                        <TableCell>
-                            <p>
-                                Post Malone
-                            </p>
-                        </TableCell>
-                        <TableCell>
-                            <p>4/4/2020</p>
-                        </TableCell>
-                        <TableCell>
-                            <p>
-                            Circles,Rockstar,sunflower
-                            </p>
-                        </TableCell>
-                    </TableRow>
+                    {
+                        ArtistList.map(artist => {
+                            return (
+                                <TableRow key={artist._id}>
+                                    <TableCell>{artist.Name}</TableCell>
+                                    <TableCell>{artist.DOB}</TableCell>
+                                    <TableCell>{artist.Songs.map((song,index)=>{
+                                    return(
+                                        <div key={index}>
+                                            {song.Name}
+                                        </div>
+                                    )
+
+                                }
+                                )}
+                                    </TableCell>
+                                   
+                                </TableRow>
+                            )
+                        }
+                        )
+                    }
                     </TableBody>
              </Table>
 
