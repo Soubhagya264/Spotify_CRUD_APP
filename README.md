@@ -31,7 +31,7 @@
 ## You can also view the artist and add artist in the view artist page
 
 
-## If the user is normal user he can only give the ratings and he won't be able to perform any CRUD Application
+## If the user is normal user he can only give the ratings and he won't be able to perform any CRUD Operation
 
 
 ![Screenshot (85)](https://user-images.githubusercontent.com/71813414/177188841-5d023a45-4eed-4cd7-95b4-975a59d38c2e.png)
