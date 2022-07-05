@@ -13,7 +13,11 @@ services:
     ports:
       - 5000:5000
     volumes:
-      - ./:/app     
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - MONGO_URL=mongodb://spotimongodb:27017/spotifyClone
+      - PORT=5000     
     depends_on:
       - spotimongodb
   spotifrontend:
