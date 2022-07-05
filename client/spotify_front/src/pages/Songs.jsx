@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Buffer } from "buffer";
 import { Title } from '../style/Footer_Styled';
 import { Button,Container, Wrapper, Table, TableHead, TableRow, TableCell, TableBody,Right } from "../style/Song_Styled";
 import {FaStar} from 'react-icons/fa';
@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { userRequest,publicRequest } from '../api/requestMethod';
 
 
-const Songs = () => {
+const Songs = ({user}) => {
     const [listOfRatings, setListOfRatings] = useState([]);
     const [listOfSongs, setListOfSongs] = useState([]);
     const [artist, setArtist] = useState([]);
@@ -24,6 +24,7 @@ const Songs = () => {
                 const response = await userRequest.get('/songs/getAll');
                 setListOfSongs(response.data);
                 console.log(response.data);
+                
                 
                
             }
@@ -50,11 +51,16 @@ const Songs = () => {
         <Container>
         <Title>TOP 10 SONGS</Title>
         <Right>
-            <Link to="/addingSong"><Button>
+        {user.isAdmin?
+           <>
+           <Link to="/addingSong"><Button>
                 <AddIcon style={{fontSize:16,paddingRight:4}}></AddIcon>
                 Add Songs
             </Button>
             </Link>
+           </>:
+           <></>
+           }
         </Right>
             <Wrapper>
              <Table>
@@ -71,15 +77,16 @@ const Songs = () => {
                     
                     {listOfSongs.map((song,index)=>{
                        
-                        const base64String = btoa(String.fromCharCode(...new Uint8Array(song.Cover.data))); 
+                        const base64String =song.Cover.data.data.toString("base64");
+                        const imgdata=`data:image/jpg;base64, ${Buffer.from(song.Cover.data).toString('base64')}`
                           
-                        console.log(base64String);
+                        console.log(song.Cover.data.data.toString("base64"));
           
                         return(
                             <TableRow key={index}>
                                 <TableCell>
                                 
-                                <img src={`data:image/jpg;base64,${base64String}`} alt="artwork" width="100px" height="100px"/>
+                                <img src={imgdata} alt="artwork" width="100px" height="100px"/>
                                 </TableCell>
                                 <TableCell>{song.Name}</TableCell>
                                 <TableCell>{song.DateOfRelease}</TableCell>

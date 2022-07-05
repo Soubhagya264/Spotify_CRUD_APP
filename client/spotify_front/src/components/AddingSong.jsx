@@ -2,100 +2,85 @@ import { Title } from "../style/Footer_Styled";
 import { Container, Wrapper, FORM, FIELD, LABEL, INPUT, BUTTON, BUTTONFILED, Imagelabel, SELECTFILE, LEFT, RIGHT, CENTER } from "../style/AddingSong_styled";
 import ImageIcon from '@mui/icons-material/Image';
 import AddIcon from '@mui/icons-material/Add';
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddArtistModal from "./AddArtistModal";
 import { userRequest } from "../api/requestMethod";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 
 const AddingSong = () => {
 
-  
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const [ArtistList, setArtistList] = useState([]);
-  const [ImageData, setImageData] = useState(null);
+
   const [formData, setFormData] = useState({
     Name: "",
-    DateOfRelease:"",
+    DateOfRelease: "",
     Artist: [],
     file: null,
   });
-const handleImageChange = (e) => {
-  setImageData(e.target.files[0], e.target.files[0].name);
-  setFormData({ ...formData, file: ImageData });
-  
-  
-}
-const handleChange = (e) => {
-  setFormData({ ...formData, [e.target.name]: e.target.value });
-}
+  const handleImageChange = (e) => {
+    const imgdata = e.target.files[0]
 
-const handleMultiChange=(e)=>{
-  const value=(Array.isArray(e)?e.map(item=>item.value):[]);
-  
-  setFormData({...formData,Artist:value});
-}
+    setFormData({ ...formData, file: imgdata });
 
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  
-  console.log(formData); 
-  userRequest.post("/songs/create",formData,
-  {headers: {
-    'Content-Type': 'multipart/form-data'
-  }}
-  ).then(res => {
-    console.log(res);
   }
-  ).catch(err => {
-    console.log(err);
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-  );
-  
+
+  const handleMultiChange = (e) => {
+    const value = (Array.isArray(e) ? e.map(item => item.value) : []);
+    setFormData({ ...formData, Artist: value });
+  }
 
 
-}
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    userRequest.post("/songs/create", formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }
+    ).then(res => {
+      console.log(res);
+    }
+    ).catch(err => {
+      console.log(err);
+    }
+    );
 
-
-
+  }
 
   useEffect(() => {
     const getArtists = async () => {
       try {
         const response = await userRequest.get("/artists/getAll");
-        
+
         const artistList = response.data.map(artist => {
           return {
             value: artist._id,
             label: artist.Name,
-            
+
           };
-        } 
+        }
         );
-       
+
         setArtistList(artistList);
-
-      
       }
-
-      
-            
-        
       catch (error) {
         console.log(error);
       }
-      
-      
-
     }
     getArtists();
   }
     , []);
-
-    
 
   return (
     <>
@@ -107,7 +92,7 @@ const handleSubmit = (e) => {
           <Title>Adding a new Song</Title>
           <Wrapper>
             <FORM encType="multipart/form-data">
-            
+
               <FIELD>
                 <LEFT>
                   <LABEL>Song Name</LABEL>
@@ -124,9 +109,9 @@ const handleSubmit = (e) => {
                   <LABEL>Date Released</LABEL>
                 </LEFT>
                 <CENTER>
-                  <INPUT type="date" name="DateOfRelease" placeholder="DateOfRelease" 
+                  <INPUT type="date" name="DateOfRelease" placeholder="DateOfRelease"
                     onChange={handleChange} value={formData.DateOfRelease} />
-                
+
                 </CENTER>
                 <RIGHT>
                 </RIGHT>
@@ -140,8 +125,8 @@ const handleSubmit = (e) => {
                   <Imagelabel for="image" >
                     <ImageIcon style={{ fontSize: 22, paddingRight: 10 }}></ImageIcon>
                     <span style={{ color: "gray", fontWeight: "bolder" }}>Upload Image</span>
-                    <INPUT type="file" name="Cover" id="image" style={{ display: "none" }} encType="multipart/form-data" onChange={handleImageChange} 
-                     />
+                    <INPUT type="file" name="Cover" id="image" style={{ display: "none" }} encType="multipart/form-data" onChange={handleImageChange}
+                    />
                   </Imagelabel>
                 </CENTER>
                 <RIGHT>
@@ -155,18 +140,18 @@ const handleSubmit = (e) => {
                 </LEFT>
 
                 <CENTER >
-                <Select style={{ width: "100%" }}
+                  <Select style={{ width: "100%" }}
                     options={ArtistList}
                     isMulti
                     showCheckbox={true}
                     name="Artist"
                     onChange={handleMultiChange}
-                    
+
                   />
                 </CENTER>
 
                 <RIGHT>
-                 <Link to="/addArtistModal"><BUTTON
+                  <Link to="/addArtistModal"><BUTTON
 
                     onClick={
                       (e) => {
@@ -176,7 +161,7 @@ const handleSubmit = (e) => {
                     }
 
                   ><AddIcon style={{ fontSize: 16, paddingRight: 4 }} />Add Artists</BUTTON>
-                  </Link> 
+                  </Link>
                 </RIGHT>
 
               </SELECTFILE>

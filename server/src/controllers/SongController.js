@@ -18,7 +18,7 @@ const createSong=async (req,res)=>{
     data = req.body;
     if (!req.file) {
         
-        return res.send({ message: 'No file received' });
+        console.log('No file received');
         
     }
     data.Cover = {

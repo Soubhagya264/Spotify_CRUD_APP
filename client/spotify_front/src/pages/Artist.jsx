@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useState,useEffect } from 'react';
 import { publicRequest } from '../api/requestMethod';
 import { Link } from 'react-router-dom';
-const Songs = () => {
+const Songs = ({user}) => {
 
     const [ArtistList, setArtistList] = useState([]);
     const [listOfSongs, setListOfSongs] = useState([]);
@@ -30,11 +30,16 @@ console.log(ArtistList);
         <Container>
         <Title>TOP 10 ARTIST</Title>
         <Right>
+           {user.isAdmin?
+           <>
             <Link to="/addArtist"><Button>
                 <AddIcon style={{fontSize:16,paddingRight:4}}></AddIcon>
                 Add Artist
             </Button>
             </Link>
+           </>:
+           <></>
+           }
         </Right>
             <Wrapper>
              <Table>

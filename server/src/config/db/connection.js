@@ -4,8 +4,8 @@ dotenv.config();
 
 
 // Connect to MongoDB
-
-const connectionString = process.env.MONGODB_URI;
+const dburi="mongodb://spotimongodb:27017/spotifyClone";
+const connectionString = process.env.MONGODB_URI || dburi;
 
 
 mongoose.connect(connectionString, {

@@ -32,6 +32,7 @@ const Login = () => {
 
     function submit(e) {
       e.preventDefault();
+      
       if ( formData.Email==='' || formData.Password===''){
         setErrorMessage('Please fill all the fields');
         return;
@@ -79,9 +80,11 @@ const Login = () => {
                         name="Password"
                         value={formData.Password}
                         onChange={handleChange}
+                        type="password"
                      />
                     <Button onClick={submit}>LOGIN</Button>
                      <Link to="/signup">CREATE A NEW ACCOUNT</Link>
+                     {errorMessage && <span style={{"color":"red"}}>{errorMessage}</span>}
                 </Form>
 
 

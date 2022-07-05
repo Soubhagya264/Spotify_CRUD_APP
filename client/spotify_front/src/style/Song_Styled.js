@@ -14,10 +14,11 @@ export const Title = styled.h1`
     font-family: 'Roboto', sans-serif;
     `
 export const Container = styled.div`
-    height: 80vh;
+    
     width:100%;
     text-align:center;
     justify-content:center;
+    margin-bottom: 20px;
     `;
     export const Right = styled.div`
    flex: 1;

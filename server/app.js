@@ -1,11 +1,11 @@
 const env=require('dotenv').config();
 const express=require('express');
 const cors=require('cors');
-const db=require('./config/db/connection');
+const db=require('./src/config/db/connection');
 const bodyParser=require('body-parser');
-const songRoutes=require('./routes/SongRoutes');
-const authRoutes=require('./routes/AuthenticationRoute');
-const artistRoutes=require('./routes/ArtistRoutes');
+const songRoutes=require('./src/routes/SongRoutes');
+const authRoutes=require('./src/routes/AuthenticationRoute');
+const artistRoutes=require('./src/routes/ArtistRoutes');
 const app=express();
 
 app.use(cors());
